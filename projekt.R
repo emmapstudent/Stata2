@@ -21,6 +21,10 @@ dane <- read.csv(
 View(dane)
 dim(dane)
 
+jarque.bera.test(dane$math.score)
+jarque.bera.test(dane$reading.score)
+jarque.bera.test(dane$writing.score)
+
 #Tworzymy jeden średni wynik z trzech różnych wyników testow
 dane <- mutate(dane,
        average.score = (math.score+reading.score+writing.score)/3)
@@ -106,3 +110,22 @@ jarque.bera.test(dane_A$average.score)
 jarque.bera.test(dane_B$average.score)
 jarque.bera.test(dane_C$average.score)
 jarque.bera.test(dane_D$average.score)
+
+#... i dla lunchu (jako proxy klasy ekonomicznej)
+dane_st <- subset(dane, dane$lunch == "standard")
+dane_fr <- subset(dane, dane$lunch == "free/reduced")
+
+par(mfrow = c(1,2))
+
+#plotNormalHistogram(dane_A$average.score)
+#plotNormalHistogram(dane_B$average.score)
+#plotNormalHistogram(dane_C$average.score)
+#plotNormalHistogram(dane_D$average.score)
+
+hist(dane_st$average.score)
+hist(dane_fr$average.score)
+
+par(mfrow = c(1,1))
+
+jarque.bera.test(dane_st$average.score)
+jarque.bera.test(dane_fr$average.score)
