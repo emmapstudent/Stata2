@@ -1,11 +1,11 @@
-if(!require(tidyverse)){install.packages("tidyverse")}
-library(tidyverse) 
 
 if(!require(tidyverse)){install.packages("tidyverse")}
 library(tidyverse) 
 
+if(!require(tidyverse)){install.packages("tidyverse")}
+library(tidyverse) 
 
-if(!require(rcompanion)){install.packages("rcompanion")}
+install.packages("rcompanion", dependencies = TRUE)
 library(rcompanion) # plotNormalHistogram(x), groupWiseMean(x)
 ?`rcompanion-package`
 
@@ -15,8 +15,7 @@ library(psych) #describe()
 if(!require(exactRankTests)){install.packages("exactRankTests")}
 library(exactRankTests) #Ansari-Bradley and Wilcoxon exact test with ties
 
-if(!require(DescTools)){install.packages("DescTools")}
-library(DescTools) #sign test, gtest
+install.packages("DescTools", dependencies = TRUE)
 
 if(!require(nortest)){install.packages("nortest")}
 library(nortest) #sf.test
@@ -27,7 +26,11 @@ library(lawstat) #Leven test
 if(!require(dplyr)){install.packages("dplyr")}
 library(dplyr)
 
-setwd("C:/Users/ep451703/Downloads/stata/projekt")
+install.packages("tseries", dependencies = TRUE)
+library(tseries)
+
+
+#setwd("/Users/emmapanasiuk/Stata II/projekt")
 dane <- read.csv(
   "StudentsPerformance.csv",
   header = T,
@@ -42,7 +45,7 @@ dim(dane)
 
 #Tworzymy jeden średni wynik z trzech różnych wyników testow
 dane <- mutate(dane,
-       average.score = (math.score+reading.score+writing.score)/3)
+               average.score = (math.score+reading.score+writing.score)/3)
 
 #Boxplot w celu sprawdzenia rozkładu wyników między płciami; porównywalne
 ggplot(data = dane, mapping = aes(x="", y = average.score)) +
